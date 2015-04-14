@@ -1,5 +1,19 @@
+Shopping Cart
+=============
+
+![Alt text](https://raw.githubusercontent.com/Kollarovic/AdminDemo/master/www/images/cart.png "Shopping Cart")
+
+
+Live Demo
+=============
+
+[Live Demo](http://demo.kollarovic.sk/)
+
+[Demo – source code](https://github.com/Kollarovic/AdminDemo)
+
+
 Installation
------------
+=============
 
 composer.json
 
@@ -91,3 +105,37 @@ default.latte
 
 
 ```
+
+Optional settings
+=============
+
+config.neon
+
+```yaml
+
+cart:
+	columns:
+		image: yes
+		name: yes
+		price: no
+		quantity: yes
+		totalWithoutVat: yes
+		total: yes
+		delete: yes
+	price:
+		currency: €
+		decimals: 2
+		decimalPoint: ','
+		thousandsSep: ' '
+		priceFormat: '{price} {currency}'
+	buttons:
+		next: Checkout
+		continue: Continue shopping
+		update: Update
+	image:
+		width: 80
+		height: 80
+	
+
+```
+
