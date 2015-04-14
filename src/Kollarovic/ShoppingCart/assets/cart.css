@@ -1,0 +1,31 @@
+table#cart {
+	margin-bottom: 30px;
+}
+table#cart td {
+	vertical-align: middle !important;
+}
+table#cart tbody tr td.quantity input {
+	width: 5em;
+}
+table#cart tbody tr td.quantity input {
+	width: 5em;
+}
+table#cart tbody tr td.delete {
+	width: 60px;
+}
+table#cart tbody tr td.image {
+	width: 106px;
+}
+table#cart tbody tr td .thumbnail {
+	margin: 0;
+}
+table#cart tfoot tr td {
+	padding-top: 16px;
+}
+table#cart tfoot tr td.total {
+	font-size: 24px;
+	text-align: right;
+}
+table#cart tfoot tr td.total span {
+	color: #C73733;
+}
