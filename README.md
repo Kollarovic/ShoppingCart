@@ -21,6 +21,7 @@ extensions:
 	cart: Kollarovic\ShoppingCart\DI\Extension
 	thumbnail: Kollarovic\Thumbnail\DI\Extension
 
+```
 
 presenter
 
