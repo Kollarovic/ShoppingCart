@@ -29,7 +29,7 @@
 					</a>
 				</td>
 				<td n:if="$showName" class="name">
-					<a n:tag-if="$item->getLink()" href="{$presenter->link($item->getLink(), $item->getLinkArgs())}" title="{$item->name}">{$item->getName()}</a><br>
+					<a n:tag-if="$item->getLink()" href="{$presenter->link($item->getLink(), $item->getLinkArgs())}" title="{$item->getName()}">{$item->getName()}</a><br>
 					{foreach $item->getOptions() as $name => $option}
 						<strong>{$name}:</strong> {$option}{sep}, {/sep}
 					{/foreach}
