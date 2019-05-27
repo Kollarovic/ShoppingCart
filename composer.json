@@ -2,7 +2,7 @@
 	"name": "kollarovic/shopping-cart",
 	"description": "Shopping Cart for Nette",
 	"keywords": ["nette", "cart", "shop", "shopping"],
-	"license": "New BSD",
+	"license": "MIT",
 
 	"authors": [
 		{
