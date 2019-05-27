@@ -95,151 +95,151 @@ class Item
 	}
 
 
-    public function getId()
-    {
-        return $this->id;
-    }
+	public function getId()
+	{
+		return $this->id;
+	}
 
 
-    public function getName()
-    {
-        return $this->name;
-    }
+	public function getName()
+	{
+		return $this->name;
+	}
 
 
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
+	public function setName($name)
+	{
+		$this->name = $name;
+		return $this;
+	}
 
 
-    public function getLink()
-    {
-        return $this->link;
-    }
+	public function getLink()
+	{
+		return $this->link;
+	}
 
 
-    public function setLink($link)
-    {
-        $this->link = $link;
-        return $this;
-    }
+	public function setLink($link)
+	{
+		$this->link = $link;
+		return $this;
+	}
 
 
-    public function getLinkArgs()
-    {
-        return $this->linkArgs;
-    }
+	public function getLinkArgs()
+	{
+		return $this->linkArgs;
+	}
 
 
-    public function setLinkArgs($linkArgs)
-    {
-        $this->linkArgs = $linkArgs;
-        return $this;
-    }
+	public function setLinkArgs($linkArgs)
+	{
+		$this->linkArgs = $linkArgs;
+		return $this;
+	}
 
 
-    public function getPricePrecision()
-    {
-        return $this->pricePrecision;
-    }
+	public function getPricePrecision()
+	{
+		return $this->pricePrecision;
+	}
 
 
-    public function setPricePrecision($pricePrecision)
-    {
-        $this->pricePrecision = $pricePrecision;
-        return $this;
-    }
+	public function setPricePrecision($pricePrecision)
+	{
+		$this->pricePrecision = $pricePrecision;
+		return $this;
+	}
 
 
-    public function getVatRate()
-    {
-        return $this->vatRate;
-    }
+	public function getVatRate()
+	{
+		return $this->vatRate;
+	}
 
 
-    public function setVatRate($vatRate)
-    {
-        $this->vatRate = $vatRate;
-        return $this;
-    }
+	public function setVatRate($vatRate)
+	{
+		$this->vatRate = $vatRate;
+		return $this;
+	}
 
 
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
+	public function getQuantity()
+	{
+		return $this->quantity;
+	}
 
 
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-        return $this;
-    }
+	public function setQuantity($quantity)
+	{
+		$this->quantity = $quantity;
+		return $this;
+	}
 
 
-    public function getUnit()
-    {
-        return $this->unit;
-    }
+	public function getUnit()
+	{
+		return $this->unit;
+	}
 
 
-    public function setUnit($unit)
-    {
-        $this->unit = $unit;
-        return $this;
-    }
+	public function setUnit($unit)
+	{
+		$this->unit = $unit;
+		return $this;
+	}
 
 
-    public function getAvailability()
-    {
-        return $this->availability;
-    }
+	public function getAvailability()
+	{
+		return $this->availability;
+	}
 
 
-    public function setAvailability($availability)
-    {
-        $this->availability = $availability;
-        return $this;
-    }
+	public function setAvailability($availability)
+	{
+		$this->availability = $availability;
+		return $this;
+	}
 
 
-    public function getImage()
-    {
-        return $this->image;
-    }
+	public function getImage()
+	{
+		return $this->image;
+	}
 
 
-    public function setImage($image)
-    {
-        $this->image = $image;
-        return $this;
-    }
+	public function setImage($image)
+	{
+		$this->image = $image;
+		return $this;
+	}
 
 
-    public function getOptions()
-    {
-        return $this->options;
-    }
+	public function getOptions()
+	{
+		return $this->options;
+	}
 
 
-    public function getData()
-    {
-        return $this->data;
-    }
+	public function getData()
+	{
+		return $this->data;
+	}
 
 
-    public function setData($data)
-    {
-        $this->data = $data;
-        return $this;
-    }
+	public function setData($data)
+	{
+		$this->data = $data;
+		return $this;
+	}
 
 
-    public function setPriceWithoutVat($priceWithoutVat)
-    {
-        $this->priceWithoutVat = $priceWithoutVat;
-    }
+	public function setPriceWithoutVat($priceWithoutVat)
+	{
+		$this->priceWithoutVat = $priceWithoutVat;
+	}
 
 }

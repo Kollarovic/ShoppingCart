@@ -41,38 +41,38 @@ class PriceHelper
 	}
 
 
-    public function setCurrency($currency)
-    {
-        $this->currency = $currency;
-        return $this;
-    }
+	public function setCurrency($currency)
+	{
+		$this->currency = $currency;
+		return $this;
+	}
 
 
-    public function setDecimals($decimals)
-    {
-        $this->decimals = $decimals;
-        return $this;
-    }
+	public function setDecimals($decimals)
+	{
+		$this->decimals = $decimals;
+		return $this;
+	}
 
 
-    public function setDecimalPoint($decimalPoint)
-    {
-        $this->decimalPoint = $decimalPoint;
-        return $this;
-    }
+	public function setDecimalPoint($decimalPoint)
+	{
+		$this->decimalPoint = $decimalPoint;
+		return $this;
+	}
 
 
-    public function setThousandsSep($thousandsSep)
-    {
-        $this->thousandsSep = $thousandsSep;
-        return $this;
-    }
+	public function setThousandsSep($thousandsSep)
+	{
+		$this->thousandsSep = $thousandsSep;
+		return $this;
+	}
 
 
-    public function setPriceFormat($priceFormat)
-    {
-        $this->priceFormat = $priceFormat;
-        return $this;
-    }
+	public function setPriceFormat($priceFormat)
+	{
+		$this->priceFormat = $priceFormat;
+		return $this;
+	}
 
 }

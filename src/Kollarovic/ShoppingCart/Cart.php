@@ -104,13 +104,13 @@ class Cart
 	}
 
 
-    public function getItems()
-    {
-        return $this->items;
-    }
+	public function getItems()
+	{
+		return $this->items;
+	}
 
 
-    private function createKey($id, $options = [])
+	private function createKey($id, $options = [])
 	{
 		$options = (array)$options;
 		sort($options);

@@ -19,8 +19,8 @@ class CartControl extends Control
 	/** @var array */
 	public $onClickContinue;
 
-    /** @var ITranslator */
-    private $translator;
+	/** @var ITranslator */
+	private $translator;
 
 	/** @var string */
 	private $templateFile;
@@ -73,189 +73,189 @@ class CartControl extends Control
 	}
 
 
-    public function getTemplateFile()
-    {
-        return $this->templateFile;
-    }
+	public function getTemplateFile()
+	{
+		return $this->templateFile;
+	}
 
 
-    public function setTemplateFile($templateFile)
-    {
-        $this->templateFile = $templateFile;
-        return $this;
-    }
+	public function setTemplateFile($templateFile)
+	{
+		$this->templateFile = $templateFile;
+		return $this;
+	}
 
 
-    public function getCart()
-    {
-        return $this->cart;
-    }
+	public function getCart()
+	{
+		return $this->cart;
+	}
 
 
-    public function setCart($cart)
-    {
-        $this->cart = $cart;
-        return $this;
-    }
+	public function setCart($cart)
+	{
+		$this->cart = $cart;
+		return $this;
+	}
 
 
-    public function isShowImage()
-    {
-        return $this->showImage;
-    }
+	public function isShowImage()
+	{
+		return $this->showImage;
+	}
 
 
-    public function setShowImage($showImage)
-    {
-        $this->showImage = $showImage;
-        return $this;
-    }
+	public function setShowImage($showImage)
+	{
+		$this->showImage = $showImage;
+		return $this;
+	}
 
 
-    public function isShowName()
-    {
-        return $this->showName;
-    }
+	public function isShowName()
+	{
+		return $this->showName;
+	}
 
 
-    public function setShowName($showName)
-    {
-        $this->showName = $showName;
-        return $this;
-    }
+	public function setShowName($showName)
+	{
+		$this->showName = $showName;
+		return $this;
+	}
 
 
-    public function isShowPrice()
-    {
-        return $this->showPrice;
-    }
+	public function isShowPrice()
+	{
+		return $this->showPrice;
+	}
 
 
-    public function setShowPrice($showPrice)
-    {
-        $this->showPrice = $showPrice;
-        return $this;
-    }
+	public function setShowPrice($showPrice)
+	{
+		$this->showPrice = $showPrice;
+		return $this;
+	}
 
 
-    public function isShowQuantity()
-    {
-        return $this->showQuantity;
-    }
+	public function isShowQuantity()
+	{
+		return $this->showQuantity;
+	}
 
 
-    public function setShowQuantity($showQuantity)
-    {
-        $this->showQuantity = $showQuantity;
-        return $this;
-    }
+	public function setShowQuantity($showQuantity)
+	{
+		$this->showQuantity = $showQuantity;
+		return $this;
+	}
 
 
-    public function isShowTotalWithoutVat()
-    {
-        return $this->showTotalWithoutVat;
-    }
+	public function isShowTotalWithoutVat()
+	{
+		return $this->showTotalWithoutVat;
+	}
 
 
-    public function setShowTotalWithoutVat($showTotalWithoutVat)
-    {
-        $this->showTotalWithoutVat = $showTotalWithoutVat;
-        return $this;
-    }
+	public function setShowTotalWithoutVat($showTotalWithoutVat)
+	{
+		$this->showTotalWithoutVat = $showTotalWithoutVat;
+		return $this;
+	}
 
 
-    public function isShowTotal()
-    {
-        return $this->showTotal;
-    }
+	public function isShowTotal()
+	{
+		return $this->showTotal;
+	}
 
 
-    public function setShowTotal($showTotal)
-    {
-        $this->showTotal = $showTotal;
-        return $this;
-    }
+	public function setShowTotal($showTotal)
+	{
+		$this->showTotal = $showTotal;
+		return $this;
+	}
 
 
-    public function isShowDelete()
-    {
-        return $this->showDelete;
-    }
+	public function isShowDelete()
+	{
+		return $this->showDelete;
+	}
 
 
-    public function setShowDelete($showDelete)
-    {
-        $this->showDelete = $showDelete;
-        return $this;
-    }
+	public function setShowDelete($showDelete)
+	{
+		$this->showDelete = $showDelete;
+		return $this;
+	}
 
 
-    public function getImageWidth()
-    {
-        return $this->imageWidth;
-    }
+	public function getImageWidth()
+	{
+		return $this->imageWidth;
+	}
 
 
-    public function setImageWidth($imageWidth)
-    {
-        $this->imageWidth = $imageWidth;
-        return $this;
-    }
+	public function setImageWidth($imageWidth)
+	{
+		$this->imageWidth = $imageWidth;
+		return $this;
+	}
 
 
-    public function getImageHeight()
-    {
-        return $this->imageHeight;
-    }
+	public function getImageHeight()
+	{
+		return $this->imageHeight;
+	}
 
 
-    public function setImageHeight($imageHeight)
-    {
-        $this->imageHeight = $imageHeight;
-        return $this;
-    }
+	public function setImageHeight($imageHeight)
+	{
+		$this->imageHeight = $imageHeight;
+		return $this;
+	}
 
 
-    public function getNextName()
-    {
-        return $this->nextName;
-    }
+	public function getNextName()
+	{
+		return $this->nextName;
+	}
 
 
-    public function setNextName($nextName)
-    {
-        $this->nextName = $nextName;
-        return $this;
-    }
+	public function setNextName($nextName)
+	{
+		$this->nextName = $nextName;
+		return $this;
+	}
 
 
-    public function getContinueName()
-    {
-        return $this->continueName;
-    }
+	public function getContinueName()
+	{
+		return $this->continueName;
+	}
 
 
-    public function setContinueName($continueName)
-    {
-        $this->continueName = $continueName;
-        return $this;
-    }
+	public function setContinueName($continueName)
+	{
+		$this->continueName = $continueName;
+		return $this;
+	}
 
 
-    public function getUpdateName()
-    {
-        return $this->updateName;
-    }
+	public function getUpdateName()
+	{
+		return $this->updateName;
+	}
 
 
-    public function setUpdateName($updateName)
-    {
-        $this->updateName = $updateName;
-        return $this;
-    }
+	public function setUpdateName($updateName)
+	{
+		$this->updateName = $updateName;
+		return $this;
+	}
 
 
-    public function render(array $options = [])
+	public function render(array $options = [])
 	{
 		$this->template->setFile($this->templateFile);
 		$this->template->showImage = $this->showImage;
@@ -291,10 +291,10 @@ class CartControl extends Control
 	{
 		$template = parent::createTemplate($class);
 		if ($this->translator) {
-            $template->addFilter('translate', [$this->translator, 'translate']);
-        } else {
-            $template->addFilter('translate', function($str){return $str;});
-        }
+			$template->addFilter('translate', [$this->translator, 'translate']);
+		} else {
+			$template->addFilter('translate', function($str){return $str;});
+		}
 		return $template;
 	}
 
