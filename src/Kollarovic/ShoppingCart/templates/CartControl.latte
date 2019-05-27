@@ -34,7 +34,6 @@
 						<strong>{$name}:</strong> {$option}{sep}, {/sep}
 					{/foreach}
 				</td>
-				{dump $item}
 				<td n:if="$showPrice" class="price">{$item->getPrice()|price}</td>
 				<td n:if="$showQuantity" class="quantity"><input n:name="$key" class="form-control"> {$item->getUnit()}</td>
 				<td n:if="$showTotalWithoutVat" class="total-without-vat"><strong>{$item->getTotalWithoutVat()|price}</strong></td>
