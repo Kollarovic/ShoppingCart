@@ -4,6 +4,7 @@ namespace Kollarovic\ShoppingCart;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
+use Nette\Localization\ITranslator;
 
 
 class CartControl extends Control
@@ -17,6 +18,9 @@ class CartControl extends Control
 
 	/** @var array */
 	public $onClickContinue;
+
+    /** @var ITranslator */
+    private $translator;
 
 	/** @var string */
 	private $templateFile;
@@ -61,9 +65,10 @@ class CartControl extends Control
 	private $updateName = 'Update';
 
 
-	function __construct(Cart $cart)
+	function __construct(Cart $cart, ITranslator $translator = null)
 	{
 		$this->cart = $cart;
+		$this->translator = $translator;
 		$this->templateFile = __DIR__ . '/templates/CartControl.latte';
 	}
 
@@ -285,9 +290,11 @@ class CartControl extends Control
 	protected function createTemplate($class = NULL)
 	{
 		$template = parent::createTemplate($class);
-		if (!array_key_exists('translate', $template->getLatte()->getFilters())) {
-			$template->addFilter('translate', function($str){return $str;});
-		}
+		if ($this->translator) {
+            $template->addFilter('translate', [$this->translator, 'translate']);
+        } else {
+            $template->addFilter('translate', function($str){return $str;});
+        }
 		return $template;
 	}
 
