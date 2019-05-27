@@ -6,33 +6,6 @@ use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
 
 
-/**
- * @method CartControl setShowImage($showImage)
- * @method CartControl setShowName($showName)
- * @method CartControl setShowPrice($showPrice)
- * @method CartControl setShowQuantity($showQuantity)
- * @method CartControl setShowTotalWithoutVat($showTotalWithoutVat)
- * @method CartControl setShowTotal($showTotal)
- * @method CartControl setShowDelete($showDelete)
- * @method CartControl setImageWidth(int $imageWidth)
- * @method CartControl setImageHeight(int $imageHeight)
- * @method CartControl setNextName(string $nextName)
- * @method CartControl setContinueName(string $continueName)
- * @method CartControl setUpdateName(string $updateName)
- *
- * @method boolean isShowImage($showImage)
- * @method boolean isShowName($showName)
- * @method boolean isShowPrice($showPrice)
- * @method boolean isShowQuantity($showQuantity)
- * @method boolean isShowTotalWithoutVat($showTotalWithoutVat)
- * @method boolean isShowTotal($showTotal)
- * @method boolean isShowDelete($showDelete)
- * @method int getImageWidth()
- * @method int getImageHeight()
- * @method string getNextName()
- * @method string getContinueName()
- * @method string getUpdateName()
- */
 class CartControl extends Control
 {
 
@@ -95,7 +68,189 @@ class CartControl extends Control
 	}
 
 
-	public function render(array $options = [])
+    public function getTemplateFile()
+    {
+        return $this->templateFile;
+    }
+
+
+    public function setTemplateFile($templateFile)
+    {
+        $this->templateFile = $templateFile;
+        return $this;
+    }
+
+
+    public function getCart()
+    {
+        return $this->cart;
+    }
+
+
+    public function setCart($cart)
+    {
+        $this->cart = $cart;
+        return $this;
+    }
+
+
+    public function isShowImage()
+    {
+        return $this->showImage;
+    }
+
+
+    public function setShowImage($showImage)
+    {
+        $this->showImage = $showImage;
+        return $this;
+    }
+
+
+    public function isShowName()
+    {
+        return $this->showName;
+    }
+
+
+    public function setShowName($showName)
+    {
+        $this->showName = $showName;
+        return $this;
+    }
+
+
+    public function isShowPrice()
+    {
+        return $this->showPrice;
+    }
+
+
+    public function setShowPrice($showPrice)
+    {
+        $this->showPrice = $showPrice;
+        return $this;
+    }
+
+
+    public function isShowQuantity()
+    {
+        return $this->showQuantity;
+    }
+
+
+    public function setShowQuantity($showQuantity)
+    {
+        $this->showQuantity = $showQuantity;
+        return $this;
+    }
+
+
+    public function isShowTotalWithoutVat()
+    {
+        return $this->showTotalWithoutVat;
+    }
+
+
+    public function setShowTotalWithoutVat($showTotalWithoutVat)
+    {
+        $this->showTotalWithoutVat = $showTotalWithoutVat;
+        return $this;
+    }
+
+
+    public function isShowTotal()
+    {
+        return $this->showTotal;
+    }
+
+
+    public function setShowTotal($showTotal)
+    {
+        $this->showTotal = $showTotal;
+        return $this;
+    }
+
+
+    public function isShowDelete()
+    {
+        return $this->showDelete;
+    }
+
+
+    public function setShowDelete($showDelete)
+    {
+        $this->showDelete = $showDelete;
+        return $this;
+    }
+
+
+    public function getImageWidth()
+    {
+        return $this->imageWidth;
+    }
+
+
+    public function setImageWidth($imageWidth)
+    {
+        $this->imageWidth = $imageWidth;
+        return $this;
+    }
+
+
+    public function getImageHeight()
+    {
+        return $this->imageHeight;
+    }
+
+
+    public function setImageHeight($imageHeight)
+    {
+        $this->imageHeight = $imageHeight;
+        return $this;
+    }
+
+
+    public function getNextName()
+    {
+        return $this->nextName;
+    }
+
+
+    public function setNextName($nextName)
+    {
+        $this->nextName = $nextName;
+        return $this;
+    }
+
+
+    public function getContinueName()
+    {
+        return $this->continueName;
+    }
+
+
+    public function setContinueName($continueName)
+    {
+        $this->continueName = $continueName;
+        return $this;
+    }
+
+
+    public function getUpdateName()
+    {
+        return $this->updateName;
+    }
+
+
+    public function setUpdateName($updateName)
+    {
+        $this->updateName = $updateName;
+        return $this;
+    }
+
+
+    public function render(array $options = [])
 	{
 		$this->template->setFile($this->templateFile);
 		$this->template->showImage = $this->showImage;

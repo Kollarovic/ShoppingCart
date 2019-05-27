@@ -14,7 +14,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"nette/nette": "~2.2",
-		"kollarovic/thumbnail": "~1.0.0"
+		"kollarovic/thumbnail": "~2.0"
 	},
 
 	"require-dev": {

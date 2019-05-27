@@ -2,17 +2,8 @@
 
 namespace Kollarovic\ShoppingCart;
 
-use Nette;
 
-
-/**
-* @method PriceHelper setCurrency(string $currency)
-* @method PriceHelper setDecimals(int $decimals)
-* @method PriceHelper setDecimalPoint(int $decimalPoint)
-* @method PriceHelper setThousandsSep(string $thousandsSep)
-* @method PriceHelper setPriceFormat(int $priceFormat)
-*/
-class PriceHelper extends Nette\Object
+class PriceHelper
 {
 	
 	/** @var string */
@@ -49,5 +40,39 @@ class PriceHelper extends Nette\Object
 		return str_replace($search, $replace, $this->priceFormat);
 	}
 
-	
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+        return $this;
+    }
+
+
+    public function setDecimals($decimals)
+    {
+        $this->decimals = $decimals;
+        return $this;
+    }
+
+
+    public function setDecimalPoint($decimalPoint)
+    {
+        $this->decimalPoint = $decimalPoint;
+        return $this;
+    }
+
+
+    public function setThousandsSep($thousandsSep)
+    {
+        $this->thousandsSep = $thousandsSep;
+        return $this;
+    }
+
+
+    public function setPriceFormat($priceFormat)
+    {
+        $this->priceFormat = $priceFormat;
+        return $this;
+    }
+
 }

@@ -1,4 +1,4 @@
-{if $cart->empty}
+{if $cart->isEmpty()}
 <p>
 	{_'Your cart is empty.'}
 </p>
@@ -24,21 +24,21 @@
 		<tbody n:inner-foreach="$cart->getItems() as $key => $item">
 			<tr>
 				<td n:if="$showImage" class="image">
-					<a n:tag-if="$item->link" href="{$presenter->link($item->link, $item->linkArgs)}" title="{$item->name}" class="thumbnail">
-						<img src="{$item->image|thumbnail: $imageWidth, $imageHeight}">
+					<a n:tag-if="$item->getLink()" href="{$presenter->link($item->getLink(), $item->getLinkArgs())}" title="{$item->getName()}" class="thumbnail">
+						<img src="{$item->getImage()|thumbnail: $imageWidth, $imageHeight}">
 					</a>
 				</td>
 				<td n:if="$showName" class="name">
-					<a n:tag-if="$item->link" href="{$presenter->link($item->link, $item->linkArgs)}" title="{$item->name}">{$item->name}</a><br>
-					{foreach $item->options as $name => $option}
+					<a n:tag-if="$item->getLink()" href="{$presenter->link($item->getLink(), $item->getLinkArgs())}" title="{$item->name}">{$item->getName()}</a><br>
+					{foreach $item->getOptions() as $name => $option}
 						<strong>{$name}:</strong> {$option}{sep}, {/sep}
 					{/foreach}
 				</td>
 				{dump $item}
-				<td n:if="$showPrice" class="price">{$item->price|price}</td>
-				<td n:if="$showQuantity" class="quantity"><input n:name="$key" class="form-control"> {$item->unit}</td>
-				<td n:if="$showTotalWithoutVat" class="total-without-vat"><strong>{$item->totalWithoutVat|price}</strong></td>
-				<td n:if="$showTotal" class="total"><strong>{$item->total|price}</strong></td>
+				<td n:if="$showPrice" class="price">{$item->getPrice()|price}</td>
+				<td n:if="$showQuantity" class="quantity"><input n:name="$key" class="form-control"> {$item->getUnit()}</td>
+				<td n:if="$showTotalWithoutVat" class="total-without-vat"><strong>{$item->getTotalWithoutVat()|price}</strong></td>
+				<td n:if="$showTotal" class="total"><strong>{$item->getTotal()|price}</strong></td>
 				<td n:if="$showDelete" class="delete"><a n:href="delete $key" class="btn btn-danger" title="Delete"><i class="fa fa-trash-o"></i></a></td>
 			</tr>
 		</tbody>
@@ -47,7 +47,7 @@
 				<td n:if="$showImage+$showName+$showPrice" colspan="{$showImage+$showName+$showPrice}"></td>
 				<td n:if="$showQuantity"><button class="btn btn-warning" type="submit" name="update"><i class="fa fa-refresh"></i> {_$updateName}</button></td>
 				<td n:if="$showTotalWithoutVat+$showTotal+$showDelete" colspan="{$showTotalWithoutVat+$showTotal+$showDelete}" class="total">
-					<strong>{_'Total'}:&nbsp;&nbsp;<span>{$cart->total|price}</span></strong>
+					<strong>{_'Total'}:&nbsp;&nbsp;<span>{$cart->getTotal()|price}</span></strong>
 				</td>
 			</tr>
 		</tfoot>

@@ -20,7 +20,7 @@ class ItemTest extends TestCase
 		$item->setPricePrecision(3);
 		Assert::equal(4942.149, $item->getPriceWithoutVat());
 		$item->setPriceWithoutVat(4000);
-		Assert::equal(4000.00, $item->getPriceWithoutVat());
+		Assert::equal(4000, $item->getPriceWithoutVat());
 
 		$item = new Item(1);
 		$item->setVatRate(21)->setPriceWithoutVat(4942.15);

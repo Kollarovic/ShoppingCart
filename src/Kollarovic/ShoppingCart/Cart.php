@@ -2,14 +2,10 @@
 
 namespace Kollarovic\ShoppingCart;
 
-use Nette\Object;
 use Nette\InvalidArgumentException;
 
 
-/**
- * @method Item[] getItems()
- */
-class Cart extends Object 
+class Cart
 {
 
 	/** @var Item[] */
@@ -108,7 +104,13 @@ class Cart extends Object
 	}
 
 
-	private function createKey($id, $options = [])
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+
+    private function createKey($id, $options = [])
 	{
 		$options = (array)$options;
 		sort($options);
