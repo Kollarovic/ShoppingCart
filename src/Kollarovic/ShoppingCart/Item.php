@@ -82,7 +82,7 @@ class Item
 	}
 
 
-	public function setPriceWithoutVat($priceWithoutVat): self
+	public function setPriceWithoutVat(float $priceWithoutVat): self
 	{
 		$this->priceWithoutVat = $priceWithoutVat;
 		return $this;
