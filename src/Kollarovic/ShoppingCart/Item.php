@@ -50,7 +50,7 @@ class Item
 	private $data = [];
 
 
-	public function __construct($id, ?float $price = null, $quantity = 1, array $options = [])
+	public function __construct($id, ?float $price = null, int $quantity = 1, array $options = [])
 	{
 		$this->id = $id;
 		$this->price = $price;
