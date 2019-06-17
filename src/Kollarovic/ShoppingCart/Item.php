@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\ShoppingCart;
 
 
 class Item
 {
-	
-	/** @var int */
+	/** @var mixed */
 	private $id;
 
 	/** @var string */
@@ -18,19 +19,19 @@ class Item
 	/** @var mixed */
 	private $linkArgs = [];
 
-	/** @var float */
+	/** @var float|null */
 	private $price;
 
-	/** @var float */
+	/** @var float|null */
 	private $priceWithoutVat;
 
 	/** @var int */
 	private $pricePrecision = 2;
 
 	/** @var int */
-	private $vatRate;
+	private $vatRate = 0;
 
-	/** @var mixed */
+	/** @var int */
 	private $quantity;
 
 	/** @var string */
@@ -49,7 +50,7 @@ class Item
 	private $data = [];
 
 
-	function __construct($id, $price = NULL, $quantity = 1, array $options = [])
+	public function __construct($id, ?float $price = null, $quantity = 1, array $options = [])
 	{
 		$this->id = $id;
 		$this->price = $price;
@@ -58,14 +59,12 @@ class Item
 	}
 
 
-	public function addQuantity($quantity)
-	{
-		$this->quantity += $quantity;
-		return $this;
-	}
+	/********************************************************************************
+	 *                                     Price                                    *
+	 ********************************************************************************/
 
 
-	public function getPrice()
+	public function getPrice(): float
 	{
 		if ($this->price) {
 			return $this->price;
@@ -74,13 +73,7 @@ class Item
 	}
 
 
-	public function getTotal()
-	{
-		return $this->getPrice() * $this->quantity;
-	}
-
-
-	public function getPriceWithoutVat()
+	public function getPriceWithoutVat(): float
 	{
 		if ($this->priceWithoutVat) {
 			return $this->priceWithoutVat;
@@ -89,38 +82,88 @@ class Item
 	}
 
 
-	public function getTotalWithoutVat()
+	public function setPriceWithoutVat($priceWithoutVat): self
+	{
+		$this->priceWithoutVat = $priceWithoutVat;
+		return $this;
+	}
+
+
+	public function getTotal(): float
+	{
+		return $this->getPrice() * $this->quantity;
+	}
+
+
+	public function getTotalWithoutVat(): float
 	{
 		return $this->getPriceWithoutVat() * $this->quantity;
 	}
 
 
-	public function getId()
+	public function getPricePrecision(): int
 	{
-		return $this->id;
+		return $this->pricePrecision;
 	}
 
 
-	public function getName()
+	public function setPricePrecision(int $pricePrecision): self
 	{
-		return $this->name;
-	}
-
-
-	public function setName($name)
-	{
-		$this->name = $name;
+		$this->pricePrecision = $pricePrecision;
 		return $this;
 	}
 
 
-	public function getLink()
+	public function getVatRate(): int
+	{
+		return $this->vatRate;
+	}
+
+
+	public function setVatRate(int $vatRate): self
+	{
+		$this->vatRate = $vatRate;
+		return $this;
+	}
+
+
+	/********************************************************************************
+	 *                                    Quantity                                  *
+	 ********************************************************************************/
+
+
+	public function addQuantity(int $quantity)
+	{
+		$this->quantity += $quantity;
+		return $this;
+	}
+
+
+	public function getQuantity(): int
+	{
+		return $this->quantity;
+	}
+
+
+	public function setQuantity(int $quantity): self
+	{
+		$this->quantity = $quantity;
+		return $this;
+	}
+
+
+	/********************************************************************************
+	 *                                     Link                                     *
+	 ********************************************************************************/
+
+
+	public function getLink(): ?string
 	{
 		return $this->link;
 	}
 
 
-	public function setLink($link)
+	public function setLink(string $link): self
 	{
 		$this->link = $link;
 		return $this;
@@ -133,113 +176,96 @@ class Item
 	}
 
 
-	public function setLinkArgs($linkArgs)
+	public function setLinkArgs($linkArgs): self
 	{
 		$this->linkArgs = $linkArgs;
 		return $this;
 	}
 
 
-	public function getPricePrecision()
+	/********************************************************************************
+	 *                                   Attributes                                 *
+	 ********************************************************************************/
+
+
+	public function getId()
 	{
-		return $this->pricePrecision;
+		return $this->id;
 	}
 
 
-	public function setPricePrecision($pricePrecision)
+	public function getName(): ?string
 	{
-		$this->pricePrecision = $pricePrecision;
+		return $this->name;
+	}
+
+
+	public function setName(string $name): self
+	{
+		$this->name = $name;
 		return $this;
 	}
 
 
-	public function getVatRate()
-	{
-		return $this->vatRate;
-	}
-
-
-	public function setVatRate($vatRate)
-	{
-		$this->vatRate = $vatRate;
-		return $this;
-	}
-
-
-	public function getQuantity()
-	{
-		return $this->quantity;
-	}
-
-
-	public function setQuantity($quantity)
-	{
-		$this->quantity = $quantity;
-		return $this;
-	}
-
-
-	public function getUnit()
-	{
-		return $this->unit;
-	}
-
-
-	public function setUnit($unit)
-	{
-		$this->unit = $unit;
-		return $this;
-	}
-
-
-	public function getAvailability()
-	{
-		return $this->availability;
-	}
-
-
-	public function setAvailability($availability)
-	{
-		$this->availability = $availability;
-		return $this;
-	}
-
-
-	public function getImage()
+	public function getImage(): ?string
 	{
 		return $this->image;
 	}
 
 
-	public function setImage($image)
+	public function setImage(string $image): self
 	{
 		$this->image = $image;
 		return $this;
 	}
 
 
-	public function getOptions()
+	public function getUnit(): ?string
+	{
+		return $this->unit;
+	}
+
+
+	public function setUnit(string $unit): self
+	{
+		$this->unit = $unit;
+		return $this;
+	}
+
+
+	public function getAvailability(): ?string
+	{
+		return $this->availability;
+	}
+
+
+	public function setAvailability(string $availability)
+	{
+		$this->availability = $availability;
+		return $this;
+	}
+
+
+	public function getOptions(): array
 	{
 		return $this->options;
 	}
 
 
-	public function getData()
+	/********************************************************************************
+	 *                                     Data                                     *
+	 ********************************************************************************/
+
+
+	public function getData(): array
 	{
 		return $this->data;
 	}
 
 
-	public function setData($data)
+	public function setData(array $data): self
 	{
 		$this->data = $data;
 		return $this;
 	}
-
-
-	public function setPriceWithoutVat($priceWithoutVat)
-	{
-		$this->priceWithoutVat = $priceWithoutVat;
-	}
-
 }

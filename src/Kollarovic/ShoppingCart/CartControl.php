@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\ShoppingCart;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Form;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Localization\ITranslator;
+use Nette\UnexpectedValueException;
 
 
 class CartControl extends Control
 {
-
 	/** @var array */
 	public $onClickUpdate;
 
@@ -19,7 +22,7 @@ class CartControl extends Control
 	/** @var array */
 	public $onClickContinue;
 
-	/** @var ITranslator */
+	/** @var ITranslator|null */
 	private $translator;
 
 	/** @var string */
@@ -28,26 +31,26 @@ class CartControl extends Control
 	/** @var Cart */
 	private $cart;
 
-	/** @var boolean */
-	private $showImage = TRUE;
+	/** @var bool */
+	private $showImage = true;
 
-	/** @var boolean */
-	private $showName = TRUE;
+	/** @var bool */
+	private $showName = true;
 
-	/** @var boolean */
-	private $showPrice = FALSE;
+	/** @var bool */
+	private $showPrice = false;
 
-	/** @var boolean */
-	private $showQuantity = TRUE;
+	/** @var bool */
+	private $showQuantity = true;
 
-	/** @var boolean */
-	private $showTotalWithoutVat = TRUE;
+	/** @var bool */
+	private $showTotalWithoutVat = true;
 
-	/** @var boolean */
-	private $showTotal = TRUE;
+	/** @var bool */
+	private $showTotal = true;
 
-	/** @var boolean */
-	private $showDelete = TRUE;
+	/** @var bool */
+	private $showDelete = true;
 
 	/** @var int */
 	private $imageWidth = 80;
@@ -65,7 +68,7 @@ class CartControl extends Control
 	private $updateName = 'Update';
 
 
-	function __construct(Cart $cart, ITranslator $translator = null)
+	public function __construct(Cart $cart, ITranslator $translator = null)
 	{
 		$this->cart = $cart;
 		$this->translator = $translator;
@@ -73,254 +76,100 @@ class CartControl extends Control
 	}
 
 
-	public function getTemplateFile()
+	/********************************************************************************
+	 *                                    Render                                    *
+	 ********************************************************************************/
+
+
+	public function getTemplateFile(): string
 	{
 		return $this->templateFile;
 	}
 
 
-	public function setTemplateFile($templateFile)
+	public function setTemplateFile(string $templateFile): self
 	{
 		$this->templateFile = $templateFile;
 		return $this;
 	}
 
 
-	public function getCart()
+	public function render(array $options = []): void
 	{
-		return $this->cart;
-	}
+		$template = $this->getTemplate();
 
-
-	public function setCart($cart)
-	{
-		$this->cart = $cart;
-		return $this;
-	}
-
-
-	public function isShowImage()
-	{
-		return $this->showImage;
-	}
-
-
-	public function setShowImage($showImage)
-	{
-		$this->showImage = $showImage;
-		return $this;
-	}
-
-
-	public function isShowName()
-	{
-		return $this->showName;
-	}
-
-
-	public function setShowName($showName)
-	{
-		$this->showName = $showName;
-		return $this;
-	}
-
-
-	public function isShowPrice()
-	{
-		return $this->showPrice;
-	}
-
-
-	public function setShowPrice($showPrice)
-	{
-		$this->showPrice = $showPrice;
-		return $this;
-	}
-
-
-	public function isShowQuantity()
-	{
-		return $this->showQuantity;
-	}
-
-
-	public function setShowQuantity($showQuantity)
-	{
-		$this->showQuantity = $showQuantity;
-		return $this;
-	}
-
-
-	public function isShowTotalWithoutVat()
-	{
-		return $this->showTotalWithoutVat;
-	}
-
-
-	public function setShowTotalWithoutVat($showTotalWithoutVat)
-	{
-		$this->showTotalWithoutVat = $showTotalWithoutVat;
-		return $this;
-	}
-
-
-	public function isShowTotal()
-	{
-		return $this->showTotal;
-	}
-
-
-	public function setShowTotal($showTotal)
-	{
-		$this->showTotal = $showTotal;
-		return $this;
-	}
-
-
-	public function isShowDelete()
-	{
-		return $this->showDelete;
-	}
-
-
-	public function setShowDelete($showDelete)
-	{
-		$this->showDelete = $showDelete;
-		return $this;
-	}
-
-
-	public function getImageWidth()
-	{
-		return $this->imageWidth;
-	}
-
-
-	public function setImageWidth($imageWidth)
-	{
-		$this->imageWidth = $imageWidth;
-		return $this;
-	}
-
-
-	public function getImageHeight()
-	{
-		return $this->imageHeight;
-	}
-
-
-	public function setImageHeight($imageHeight)
-	{
-		$this->imageHeight = $imageHeight;
-		return $this;
-	}
-
-
-	public function getNextName()
-	{
-		return $this->nextName;
-	}
-
-
-	public function setNextName($nextName)
-	{
-		$this->nextName = $nextName;
-		return $this;
-	}
-
-
-	public function getContinueName()
-	{
-		return $this->continueName;
-	}
-
-
-	public function setContinueName($continueName)
-	{
-		$this->continueName = $continueName;
-		return $this;
-	}
-
-
-	public function getUpdateName()
-	{
-		return $this->updateName;
-	}
-
-
-	public function setUpdateName($updateName)
-	{
-		$this->updateName = $updateName;
-		return $this;
-	}
-
-
-	public function render(array $options = [])
-	{
-		$this->template->setFile($this->templateFile);
-		$this->template->showImage = $this->showImage;
-		$this->template->showName = $this->showName;
-		$this->template->showPrice = $this->showPrice;
-		$this->template->showQuantity = $this->showQuantity;
-		$this->template->showTotalWithoutVat = $this->showTotalWithoutVat;
-		$this->template->showTotal = $this->showTotal;
-		$this->template->showDelete = $this->showDelete;
-		$this->template->imageWidth = $this->imageWidth;
-		$this->template->imageHeight = $this->imageHeight;
-		$this->template->nextName = $this->nextName;
-		$this->template->continueName = $this->continueName;
-		$this->template->updateName = $this->updateName;
-
-		foreach ($options as $key => $value) {
-			$this->template->$key = $value;
+		if (!$template instanceof Template) {
+			throw new UnexpectedValueException();
 		}
 
-		$this->template->cart = $this->cart;
-		$this->template->render();
+		if ($this->translator) {
+			$template->setTranslator($this->translator);
+		} else {
+			$template->addFilter('translate', function ($str) {return $str;});
+		}
+
+		$template->setFile($this->templateFile);
+		$template->showImage = $this->showImage;
+		$template->showName = $this->showName;
+		$template->showPrice = $this->showPrice;
+		$template->showQuantity = $this->showQuantity;
+		$template->showTotalWithoutVat = $this->showTotalWithoutVat;
+		$template->showTotal = $this->showTotal;
+		$template->showDelete = $this->showDelete;
+		$template->imageWidth = $this->imageWidth;
+		$template->imageHeight = $this->imageHeight;
+		$template->nextName = $this->nextName;
+		$template->continueName = $this->continueName;
+		$template->updateName = $this->updateName;
+
+		foreach ($options as $key => $value) {
+			$template->$key = $value;
+		}
+
+		$template->cart = $this->cart;
+		$template->render();
 	}
 
 
-	public function handleDelete($key)
+	/********************************************************************************
+	 *                                   Signals                                    *
+	 ********************************************************************************/
+
+
+	public function handleDelete(string $key): void
 	{
 		$this->cart->delete($key);
 		$this->presenter->redirect('this');
 	}
 
 
-	protected function createTemplate($class = NULL)
-	{
-		$template = parent::createTemplate($class);
-		if ($this->translator) {
-			$template->addFilter('translate', [$this->translator, 'translate']);
-		} else {
-			$template->addFilter('translate', function($str){return $str;});
-		}
-		return $template;
-	}
+	/********************************************************************************
+	 *                                  Components                                  *
+	 ********************************************************************************/
 
 
-	protected function createComponentUpdateForm()
+	protected function createComponentUpdateForm(): Form
 	{
 		$form = new Form();
-		foreach($this->cart->getItems() as $key => $item) {
-			$form->addText($key)//->setType('number')
-				->setType('number')
+		foreach ($this->cart->getItems() as $key => $item) {
+			$form->addText($key)
+				->setHtmlType('number')
 				->setValue($item->getQuantity())
 				->setRequired();
 		}
 
-		$form->addSubmit('update', 'Update')->onClick[] = function($submit) {
+		$form->addSubmit('update', 'Update')->onClick[] = function ($submit) {
 			$this->updateCart($submit->form);
 			$this->onClickUpdate($this->cart);
 			$this->presenter->redirect('this');
 		};
 
-		$form->addSubmit('next', 'Checkout')->onClick[] = function($submit) {
+		$form->addSubmit('next', 'Checkout')->onClick[] = function ($submit) {
 			$this->updateCart($submit->form);
 			$this->onClickNext($this->cart);
 		};
 
-		$form->addSubmit('continue', 'Continue shopping')->onClick[] = function($submit) {
+		$form->addSubmit('continue', 'Continue shopping')->onClick[] = function ($submit) {
 			$this->updateCart($submit->form);
 			$this->onClickContinue($this->cart);
 		};
@@ -329,11 +178,184 @@ class CartControl extends Control
 	}
 
 
-	private function updateCart($form)
+	private function updateCart(Form $form): void
 	{
-		foreach($form->values as $key => $quantity) {
-			$this->cart->update($key, (int)$quantity);
+		foreach ($form->values as $key => $quantity) {
+			$this->cart->update((string) $key, (int) $quantity);
 		}
 	}
 
+
+	/********************************************************************************
+	 *                              Getters and Setters                             *
+	 ********************************************************************************/
+
+
+	public function getCart(): Cart
+	{
+		return $this->cart;
+	}
+
+
+	public function setCart(Cart $cart): self
+	{
+		$this->cart = $cart;
+		return $this;
+	}
+
+
+	public function isShowImage(): bool
+	{
+		return $this->showImage;
+	}
+
+
+	public function setShowImage(bool $showImage): self
+	{
+		$this->showImage = $showImage;
+		return $this;
+	}
+
+
+	public function isShowName(): bool
+	{
+		return $this->showName;
+	}
+
+
+	public function setShowName(bool $showName): self
+	{
+		$this->showName = $showName;
+		return $this;
+	}
+
+
+	public function isShowPrice(): bool
+	{
+		return $this->showPrice;
+	}
+
+
+	public function setShowPrice(bool $showPrice): self
+	{
+		$this->showPrice = $showPrice;
+		return $this;
+	}
+
+
+	public function isShowQuantity(): bool
+	{
+		return $this->showQuantity;
+	}
+
+
+	public function setShowQuantity(bool $showQuantity): self
+	{
+		$this->showQuantity = $showQuantity;
+		return $this;
+	}
+
+
+	public function isShowTotalWithoutVat(): bool
+	{
+		return $this->showTotalWithoutVat;
+	}
+
+
+	public function setShowTotalWithoutVat(bool $showTotalWithoutVat): self
+	{
+		$this->showTotalWithoutVat = $showTotalWithoutVat;
+		return $this;
+	}
+
+
+	public function isShowTotal(): bool
+	{
+		return $this->showTotal;
+	}
+
+
+	public function setShowTotal(bool $showTotal): self
+	{
+		$this->showTotal = $showTotal;
+		return $this;
+	}
+
+
+	public function isShowDelete(): bool
+	{
+		return $this->showDelete;
+	}
+
+
+	public function setShowDelete(bool $showDelete): self
+	{
+		$this->showDelete = $showDelete;
+		return $this;
+	}
+
+
+	public function getImageWidth(): int
+	{
+		return $this->imageWidth;
+	}
+
+
+	public function setImageWidth(int $imageWidth): self
+	{
+		$this->imageWidth = $imageWidth;
+		return $this;
+	}
+
+
+	public function getImageHeight(): int
+	{
+		return $this->imageHeight;
+	}
+
+
+	public function setImageHeight(int $imageHeight): self
+	{
+		$this->imageHeight = $imageHeight;
+		return $this;
+	}
+
+
+	public function getNextName(): string
+	{
+		return $this->nextName;
+	}
+
+
+	public function setNextName(string $nextName): self
+	{
+		$this->nextName = $nextName;
+		return $this;
+	}
+
+
+	public function getContinueName(): string
+	{
+		return $this->continueName;
+	}
+
+
+	public function setContinueName(string $continueName): self
+	{
+		$this->continueName = $continueName;
+		return $this;
+	}
+
+
+	public function getUpdateName(): string
+	{
+		return $this->updateName;
+	}
+
+
+	public function setUpdateName(string $updateName): self
+	{
+		$this->updateName = $updateName;
+		return $this;
+	}
 }

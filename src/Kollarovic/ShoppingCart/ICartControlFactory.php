@@ -1,14 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\ShoppingCart;
 
 
 interface ICartControlFactory
 {
-
-	/**
-	 * @return CartControl
-	 */
-	function create();
-
+	function create(): CartControl;
 }

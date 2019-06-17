@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kollarovic\ShoppingCart\Test;
 
@@ -12,8 +13,6 @@ require_once __DIR__ . '/../bootstrap.php';
 
 class CartTest extends TestCase
 {
-
-
 	public function testExtension()
 	{
 		$cart = $this->createContainer()->getByType('Kollarovic\ShoppingCart\Cart');
@@ -31,7 +30,7 @@ class CartTest extends TestCase
 		$cart->addItem(1, 10, 1, ['size' => 'l', 'color' => 'blue']);
 		Assert::count(2, $cart->getItems());
 		Assert::equal(5, $cart->getQuantity());
-		Assert::equal(50, $cart->getTotal());
+		Assert::equal(50.0, $cart->getTotal());
 	}
 
 
@@ -67,7 +66,6 @@ class CartTest extends TestCase
 	{
 		new Cart('string');
 	}
-
 }
 
 

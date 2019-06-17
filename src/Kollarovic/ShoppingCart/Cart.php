@@ -1,27 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\ShoppingCart;
 
+use ArrayAccess;
+use IteratorAggregate;
 use Nette\InvalidArgumentException;
 
 
 class Cart
 {
-
-	/** @var Item[] */
+	/** @var Item[]|mixed */
 	private $items;
 
 
 	public function __construct($items = [])
 	{
-		if (!($items instanceof \ArrayAccess and $items instanceof \IteratorAggregate) and !is_array($items)) {
+		if (!($items instanceof ArrayAccess and $items instanceof IteratorAggregate) and !is_array($items)) {
 			throw new InvalidArgumentException('Items must be array or ArrayAccess and IteratorAggregate.');
 		}
 		$this->items = $items;
 	}
 
 
-	public function addItem($id, $price, $quantity = 1, array $options = [])
+	/********************************************************************************
+	 *                               Items management                               *
+	 ********************************************************************************/
+
+
+	public function addItem($id, $price, int $quantity = 1, array $options = []): Item
 	{
 		$key = $this->createKey($id, $options);
 		$item = $this->getItem($key);
@@ -35,12 +43,12 @@ class Cart
 	}
 
 
-	public function update($key, $quantity)
+	public function update(string $key, int $quantity): void
 	{
 		if ($quantity <= 0) {
 			$this->delete($key);
 		} else {
-			$item = isset($this->items[$key]) ? $this->items[$key] : NULL;
+			$item = isset($this->items[$key]) ? $this->items[$key] : null;
 			if ($item) {
 				$item->setQuantity($quantity);
 			}
@@ -48,59 +56,28 @@ class Cart
 	}
 
 
-	public function delete($key)
+	public function delete(string $key): void
 	{
 		unset($this->items[$key]);
 	}
-	
 
-	public function clear()
+
+	public function clear(): void
 	{
-		foreach($this->items as $key => $item) {
+		foreach ($this->items as $key => $item) {
 			$this->delete($key);
 		}
 	}
 
 
-	public function isEmpty()
+	/********************************************************************************
+	 *                              Getters and Setters                             *
+	 ********************************************************************************/
+
+
+	public function isEmpty(): bool
 	{
-		return $this->getQuantity() > 0 ? FALSE : TRUE;
-	}
-
-
-	public function getItem($key)
-	{
-		return isset($this->items[$key]) ? $this->items[$key] : NULL;
-	}
-
-	
-	public function getTotal()
-	{
-		$total = 0;
-		foreach($this->items as $item) {
-			$total += $item->getTotal();
-		}
-		return $total;
-	}
-
-
-	public function getTotalWithoutVat()
-	{
-		$total = 0;
-		foreach($this->items as $item) {
-			$total += $item->getTotalWithoutVat();
-		}
-		return $total;
-	}
-
-
-	public function getQuantity()
-	{
-		$quantity = 0;
-		foreach($this->items as $key => $item) {
-			$quantity += $item->getQuantity();
-		}
-		return $quantity;
+		return $this->getQuantity() > 0 ? false : true;
 	}
 
 
@@ -110,11 +87,51 @@ class Cart
 	}
 
 
-	private function createKey($id, $options = [])
+	public function getItem(string $key): ?Item
 	{
-		$options = (array)$options;
+		return isset($this->items[$key]) ? $this->items[$key] : null;
+	}
+
+
+	public function getTotal(): float
+	{
+		$total = 0;
+		foreach ($this->items as $item) {
+			$total += $item->getTotal();
+		}
+		return $total;
+	}
+
+
+	public function getTotalWithoutVat(): float
+	{
+		$total = 0;
+		foreach ($this->items as $item) {
+			$total += $item->getTotalWithoutVat();
+		}
+		return $total;
+	}
+
+
+	public function getQuantity()
+	{
+		$quantity = 0;
+		foreach ($this->items as $key => $item) {
+			$quantity += $item->getQuantity();
+		}
+		return $quantity;
+	}
+
+
+	/********************************************************************************
+	 *                                     Other                                    *
+	 ********************************************************************************/
+
+
+	private function createKey($id, $options = []): string
+	{
+		$options = (array) $options;
 		sort($options);
 		return md5($id . '-' . serialize($options));
 	}
-
 }

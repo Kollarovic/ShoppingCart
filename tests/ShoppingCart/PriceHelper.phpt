@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Kollarovic\ShoppingCart\Test;
 
@@ -10,8 +11,6 @@ require_once __DIR__ . '/../bootstrap.php';
 
 class PriceHelperTest extends TestCase
 {
-
-
 	public function testExtension()
 	{
 		$priceHelper = $this->createContainer()
@@ -31,7 +30,6 @@ class PriceHelperTest extends TestCase
 		$priceHelper->setDecimals(1);
 		Assert::same('1.450,1 Kč', $priceHelper->format(1450.14));
 	}
-
 }
 
 

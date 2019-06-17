@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Kollarovic\ShoppingCart\DI;
 
+use Kollarovic\ShoppingCart\Cart;
+use Kollarovic\ShoppingCart\ICartControlFactory;
+use Kollarovic\ShoppingCart\PriceHelper;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Statement;
 
 
 class Extension extends CompilerExtension
 {
-
-
 	private function getDefaultConfig()
 	{
 		return [
@@ -23,13 +27,13 @@ class Extension extends CompilerExtension
 				'filterName' => 'price',
 			],
 			'columns' => [
-				'image' => TRUE,
-				'name' => TRUE,
-				'price' => FALSE,
-				'quantity' => TRUE,
-				'totalWithoutVat' => TRUE,
-				'total' => TRUE,
-				'delete' => TRUE,
+				'image' => true,
+				'name' => true,
+				'price' => false,
+				'quantity' => true,
+				'totalWithoutVat' => true,
+				'total' => true,
+				'delete' => true,
 			],
 			'buttons' => [
 				'next' => 'Checkout',
@@ -39,21 +43,22 @@ class Extension extends CompilerExtension
 			'image' => [
 				'width' => 80,
 				'height' => 80,
-			]
+			],
 		];
 	}
 
 
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
-		$config = $this->getConfig($this->getDefaultConfig());
+		$config = $this->validateConfig($this->getDefaultConfig());
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('cart'))
-			->setClass('Kollarovic\ShoppingCart\Cart', [$config['items']]);
+			->setFactory(Cart::class, [$config['items']]);
 
-		$builder->addDefinition($this->prefix('cartControlFactory'))
-			->setImplement('Kollarovic\ShoppingCart\ICartControlFactory')
+		$builder->addFactoryDefinition($this->prefix('cartControlFactory'))
+			->setImplement(ICartControlFactory::class)
+			->getResultDefinition()
 			->addSetup('setShowImage', [$config['columns']['image']])
 			->addSetup('setShowName', [$config['columns']['name']])
 			->addSetup('setShowPrice', [$config['columns']['price']])
@@ -69,7 +74,7 @@ class Extension extends CompilerExtension
 
 		$priceConfig = $config['price'];
 		$builder->addDefinition($this->prefix('priceHelper'))
-			->setClass('Kollarovic\ShoppingCart\PriceHelper', [
+			->setFactory(PriceHelper::class, [
 				'currency' => $priceConfig['currency'],
 				'decimals' => $priceConfig['decimals'],
 				'decimalPoint' => $priceConfig['decimalPoint'],
@@ -78,9 +83,9 @@ class Extension extends CompilerExtension
 			]);
 
 		if ($builder->hasDefinition('nette.latteFactory')) {
+			/** @var FactoryDefinition $definition  */
 			$definition = $builder->getDefinition('nette.latteFactory');
-			$definition->addSetup('addFilter', array($config['price']['filterName'], array($this->prefix('@priceHelper'), 'format')));
+			$definition->getResultDefinition()->addSetup('addFilter', [$config['price']['filterName'], [$this->prefix('@priceHelper'), 'format']]);
 		}
 	}
-
 }
